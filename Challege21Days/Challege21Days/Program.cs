@@ -5,14 +5,14 @@ short age = 33;
 if (gender == 'k' && age < 30)
 	Console.WriteLine("Kobieta poniżej 30 lat.");
 
-if (name == "Ewa" && age == 33)
+else if (name == "Ewa" && age == 33)
 	Console.WriteLine("Ewa lat {0}", age);
 
-if (gender == 'm' && age < 18)
+else if (gender == 'm' && age < 18)
 	Console.WriteLine("Niepełnoletni mężczyzna.");
 
-if (gender == 'k' && age >= 60)
+else if (gender == 'k' && age >= 60)
 	Console.WriteLine("Kobieta w wieku emerytalnym.");
 
-if (gender == 'm' && age >= 65)
+else if (gender == 'm' && age >= 65)
 	Console.WriteLine("Meżczyzna w wieku emerytalnym.");
