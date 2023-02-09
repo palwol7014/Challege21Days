@@ -1,18 +1,13 @@
-﻿string name = "Ewa";
-char gender = 'k';
-short age = 33;
+﻿int[] digits = new int[10];
+int num = 542641100;
 
-if (gender == 'k' && age < 30)
-	Console.WriteLine("Kobieta poniżej 30 lat.");
+Console.WriteLine("Dla liczby {0}\n", num);
 
-else if (name == "Ewa" && age == 33)
-	Console.WriteLine("Ewa lat {0}", age);
+do
+{
+	digits[num % 10]++;
+	num /= 10;
+}while(num > 0);
 
-else if (gender == 'm' && age < 18)
-	Console.WriteLine("Niepełnoletni mężczyzna.");
-
-else if (gender == 'k' && age >= 60)
-	Console.WriteLine("Kobieta w wieku emerytalnym.");
-
-else if (gender == 'm' && age >= 65)
-	Console.WriteLine("Meżczyzna w wieku emerytalnym.");
+for(int i = 0; i < digits.Length; i++)
+	Console.WriteLine("{0} => {1}", i , digits[i]);
