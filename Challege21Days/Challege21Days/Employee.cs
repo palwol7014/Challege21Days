@@ -6,39 +6,53 @@ using System.Threading.Tasks;
 
 namespace Challege21Days
 {
-	internal class Employee
+	public class Employee
 	{
 		private string name;
 		private string surname;
 		private short age;
-		private int scores;
+		private int result;
 
-		public int Scores
-		{
-			get
-			{
-				return scores;
-			}
-		}
+		public int Result => result;
 
-		public Employee(string name, string surname, short age, int[] tabScores)
+		public Employee(string name, string surname, short age)
 		{
 			this.name = name;
 			this.surname = surname;
 			this.age = age;
 
-			foreach (var item in tabScores)
+		}
+
+		public void AddScore(int score)
+		{
+			if (score > 0)
 			{
-				scores += item;
+				result += score;
+			}
+			else
+			{
+				Console.WriteLine("Podana wartość nie jest wartością większą od 0.");
+			}
+		}
+
+		public void LostScore(int score)
+		{
+			if (score > 0)
+			{
+				result -= score;
+			}
+			else
+			{
+				Console.WriteLine("Podana wartość jest wartością większą od 0.");
 			}
 		}
 
 		public void Show()
 		{
-			Console.WriteLine("Imię: {0}", name);
-			Console.WriteLine("Nazwisko: {0}", surname);
-			Console.WriteLine("Wiek: {0}", age);
-			Console.WriteLine("punkty: {0}\n", scores);
+			Console.WriteLine("Imię: {name}", name);
+			Console.WriteLine("Nazwisko: {surname}", surname);
+			Console.WriteLine("Wiek: {age}", age);
+			Console.WriteLine("punkty: {scores}\n", result);
 		}
 	}
 }
