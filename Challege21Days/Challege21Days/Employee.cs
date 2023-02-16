@@ -8,51 +8,43 @@ namespace Challege21Days
 {
 	public class Employee
 	{
-		private string name;
-		private string surname;
-		private short age;
-		private int result;
+		private List<float> grades = new List<float>();
+		public string Name{ get; private set; }
+		public string Surname { get; private set; }
 
-		public int Result => result;
-
-		public Employee(string name, string surname, short age)
+		public Employee(string name, string surname)
 		{
-			this.name = name;
-			this.surname = surname;
-			this.age = age;
-
+			Name = name;
+			Surname = surname;
 		}
 
-		public void AddScore(int score)
+		public void AddGrade(float grade)
 		{
-			if (score > 0)
-			{
-				result += score;
-			}
-			else
-			{
-				Console.WriteLine("Podana wartość nie jest wartością większą od 0.");
-			}
+			grades.Add(grade);
 		}
 
-		public void LostScore(int score)
+		public Statistics GetStatistics()
 		{
-			if (score > 0)
+			var statistics = new Statistics();
+			foreach(var grade in grades)
 			{
-				result -= score;
+				statistics.Min = Math.Min(statistics.Min, grade);
+				statistics.Max = Math.Max(statistics.Max, grade);
+				statistics.Average += grade;
 			}
-			else
-			{
-				Console.WriteLine("Podana wartość jest wartością większą od 0.");
-			}
+
+			statistics.Average /= grades.Count;
+
+			return statistics;
 		}
 
-		public void Show()
+		public override string ToString()
 		{
-			Console.WriteLine("Imię: {name}", name);
-			Console.WriteLine("Nazwisko: {surname}", surname);
-			Console.WriteLine("Wiek: {age}", age);
-			Console.WriteLine("punkty: {scores}\n", result);
+			var sb = new StringBuilder();
+			sb.AppendLine($"Imię: {Name}");
+			sb.AppendLine($"Nazwisko: {Surname}");
+
+			return sb.ToString();
 		}
 	}
 }

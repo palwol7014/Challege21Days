@@ -1,50 +1,57 @@
 namespace Challege21Days.Tests
 {
-	public class Tests
+	public class EmployeeTests
 	{
-
 		[Test]
-		public void WhenEmployeeGainedPoints()
+		public void CheckCorrectMaxValueGrade()
 		{
 			//arrange
-			Employee employee = new Employee("Adam", "###", 45);
+			var emp = new Employee("Palwol", "TestUser");
 
 			//act
-			employee.AddScore(4);
-			employee.AddScore(5);
+			emp.AddGrade(3);
+			emp.AddGrade(4);
+			emp.AddGrade(6);
+			var stat = emp.GetStatistics();
 
-			// assert
-			Assert.AreEqual(9, employee.Result);
+			//assert
+			Assert.AreEqual(6, stat.Max);
+		}
+		
+		[Test]
+		public void CheckCorrectMinValueGrade()
+		{
+			//arrange
+			var emp = new Employee("Palwol", "TestUser");
+
+			//act
+			emp.AddGrade(3);
+			emp.AddGrade(4);
+			emp.AddGrade(6);
+			var stat = emp.GetStatistics();
+
+			//assert
+			Assert.AreEqual(3, stat.Min);
 		}
 
 		[Test]
-		public void WhenEmployeeLostPoints()
+		public void CheckCorrectAverageValueGrade()
 		{
 			//arrange
-			Employee employee = new Employee("Adam", "###", 45);
+			var emp = new Employee("Palwol", "TestUser");
 
 			//act
-			employee.LostScore(4);
-			employee.LostScore(5);
+			emp.AddGrade(3);
+			emp.AddGrade(4);
+			emp.AddGrade(6);
+			var stat = emp.GetStatistics();
 
-			// assert
-			Assert.AreEqual(-9, employee.Result);
-		}
+			/* 
+			 * assert
+			 * Must be cast to float, default is double
+			 */
 
-		[Test]
-		public void WhenEmployeeGainedAndLostPoints()
-		{
-			//arrange
-			Employee employee = new Employee("Adam", "###", 45);
-
-			//act
-			employee.AddScore(4);
-			employee.AddScore(5);
-			employee.LostScore(4);
-			employee.LostScore(5);
-
-			// assert
-			Assert.AreEqual(0, employee.Result);
+			Assert.AreEqual((float)13.0 / (float)3.0, stat.Average);
 		}
 	}
 }
