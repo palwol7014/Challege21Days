@@ -20,7 +20,29 @@ namespace Challege21Days
 
 		public void AddGrade(float grade)
 		{
-			grades.Add(grade);
+			if (grade >= 0 && grade <= 100)
+			{
+				grades.Add(grade);
+			}
+			else
+			{
+				Console.WriteLine("Nieprawidłowa ocena. Ocena musi się mieścić w przedziale od 0 do 100.");
+			}
+		}
+
+		public void AddGrade(string grade)
+		{
+			float fGrade;
+			bool isParse = float.TryParse(grade, out fGrade);
+
+			if (isParse && fGrade >= 0 && fGrade <= 100)
+			{
+				grades.Add(fGrade);
+			}
+			else
+			{
+				Console.WriteLine("Nieprawidłowa ocena. Ocena musi się mieścić w przedziale od 0 do 100.");
+			}
 		}
 
 		public Statistics GetStatistics()
