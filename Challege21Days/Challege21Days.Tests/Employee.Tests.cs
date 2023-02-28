@@ -1,5 +1,3 @@
-
-
 namespace Challege21Days.Tests
 {
 	public class EmployeeTests

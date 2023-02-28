@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace Challege21Days
 {
-	public class Employee
+	public class Employee : Person
 	{
 		private List<float> grades = new List<float>();
 		private bool isChange = false;
 		private Statistics? statistics;
-		public string Name{ get; private set; }
-		public string Surname { get; private set; }
 		public Statistics? Statistics
 		{
 			get
@@ -28,10 +26,8 @@ namespace Challege21Days
 			}
 		}
 
-		public Employee(string name, string surname)
+		public Employee(string name, string surname) : base(name, surname)
 		{
-			Name = name;
-			Surname = surname;
 		}
 
 		public void AddGrade(float grade)
