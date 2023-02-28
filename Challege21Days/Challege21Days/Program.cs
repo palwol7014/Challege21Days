@@ -1,4 +1,5 @@
 ﻿using Challege21Days;
+using System;
 
 Console.WriteLine("Witamy w programie noty do oceny pracowników.");
 
@@ -23,11 +24,25 @@ do
 			
 	if(float.TryParse(input, out grade))
 	{
-		employee.AddGrade(grade);
+		try
+		{
+			employee.AddGrade(grade);
+		}
+		catch (Exception excetion)
+		{
+			Console.WriteLine(excetion.Message);
+		}
 	}
 	else
 	{
-		employee.AddGrade(input);
+		try
+		{
+			employee.AddGrade(input);
+		}
+		catch (Exception excetion)
+		{
+			Console.WriteLine(excetion.Message);
+		}
 	}	
 } while (input != "w" && input != "W");
 

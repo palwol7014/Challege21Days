@@ -43,7 +43,7 @@ namespace Challege21Days
 			}
 			else
 			{
-				Console.WriteLine("Nieprawidłowa ocena. Ocena musi się mieścić w przedziale od 0 do 100.");
+				throw new Exception("Nieprawidłowa ocena. Ocena musi się mieścić w przedziale od 0 do 100.");
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace Challege21Days
 			}
 			else
 			{
-				Console.WriteLine("Nieprawidłowa litera. Tylko są akceptowalne litery od \"a\" do \"j\"");
+				throw new Exception("Nieprawidłowa litera. Tylko są akceptowalne litery od \"a\" do \"j\"");
 			}
 		}
 
