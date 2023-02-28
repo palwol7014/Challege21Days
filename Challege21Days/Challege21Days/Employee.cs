@@ -83,7 +83,7 @@ namespace Challege21Days
 		{
 			int gradeInInt = (int)(grade / 10);
 
-			if (gradeInInt > 10)
+			if (gradeInInt > 9)
 			{
 				return 'A';
 			}

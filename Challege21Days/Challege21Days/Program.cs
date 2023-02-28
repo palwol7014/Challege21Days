@@ -39,7 +39,7 @@ if(employee.Statistics is null)
 }
 else
 {
-	employee.Statistics.ToString();
+	Console.WriteLine(employee.Statistics.ToString());
 	Console.WriteLine("\nW formacie literowym\n");
-	employee.Statistics.ToString(true);
+	Console.WriteLine(employee.Statistics.ToString(true));
 }
