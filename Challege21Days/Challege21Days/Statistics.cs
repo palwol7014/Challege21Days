@@ -18,12 +18,27 @@ namespace Challege21Days
 			Min = float.MaxValue;
 		}
 
-		public override string ToString()
+		public string ToString(bool formatLetter = false)
 		{
 			var sb = new StringBuilder();
-			sb.AppendLine($"Najwyższa ocena: {Max:N2}");
-			sb.AppendLine($"Najniższa ocena: {Min:N2}");
-			sb.AppendLine($"Średnia ocena: {Average:N2}");
+			char max, min, average;
+
+			if (formatLetter)
+			{
+				max = Employee.ConvertGradeToLetter(Max);
+				min = Employee.ConvertGradeToLetter(Min);
+				average = Employee.ConvertGradeToLetter(Average);
+
+				sb.AppendLine($"Najwyższa ocena: {max}");
+				sb.AppendLine($"Najniższa ocena: {min}");
+				sb.AppendLine($"Średnia ocena: {average}");
+			}
+			else
+			{
+				sb.AppendLine($"Najwyższa ocena: {Max:N2}");
+				sb.AppendLine($"Najniższa ocena: {Min:N2}");
+				sb.AppendLine($"Średnia ocena: {Average:N2}"); 
+			}
 
 			return sb.ToString();
 		}

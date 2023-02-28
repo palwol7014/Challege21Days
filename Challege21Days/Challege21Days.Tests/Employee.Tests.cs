@@ -1,109 +1,60 @@
+
+
 namespace Challege21Days.Tests
 {
 	public class EmployeeTests
 	{
+		private Employee emp;
+
+		[SetUp]
+		public void SetUpEmployee()
+		{
+			emp = new Employee("Palwol", "TestUser");
+		}
+
 		[Test]
 		public void CheckCorrectMaxValueGrade()
 		{
-			//arrange
-			var emp = new Employee("Palwol", "TestUser");
-
-			//act
 			emp.AddGrade(3);
-			emp.AddGrade(4);
+			emp.AddGrade("A");
 			emp.AddGrade(6);
-			var stat = emp.GetStatistics();
 
-			//assert
-			Assert.AreEqual(6, stat.Max);
+			
+			Assert.IsNotNull(emp.Statistics);
+			Assert.AreEqual(100, emp.Statistics.Max);
 		}
 		
 		[Test]
 		public void CheckCorrectMinValueGrade()
 		{
-			//arrange
-			var emp = new Employee("Palwol", "TestUser");
-
-			//act
 			emp.AddGrade(3);
-			emp.AddGrade(4);
+			emp.AddGrade("t");
 			emp.AddGrade(6);
-			var stat = emp.GetStatistics();
 
-			//assert
-			Assert.AreEqual(3, stat.Min);
+			
+			Assert.IsNotNull(emp.Statistics);
+			Assert.AreEqual(3, emp.Statistics.Min);
 		}
 
 		[Test]
 		public void CheckCorrectAverageValueGrade()
 		{
-			//arrange
-			var emp = new Employee("Palwol", "TestUser");
-
-			//act
 			emp.AddGrade(3);
-			emp.AddGrade(4);
+			emp.AddGrade("J");
 			emp.AddGrade(6);
-			var stat = emp.GetStatistics();
 
-			/* 
-			 * assert
-			 * Must be cast to float, default is double
-			 */
-
-			Assert.AreEqual((float)13.0 / (float)3.0, stat.Average);
+			
+			Assert.IsNotNull(emp.Statistics);
+			Assert.AreEqual((float)19 / (float)3.0, emp.Statistics.Average);
 		}
 
 		[Test]
-		public void CheckCorrectMaxValueGradeForString()
+		public void CheckCorrectNoteToLetter()
 		{
-			//arrange
-			var emp = new Employee("Palwol", "TestUser");
+			emp.AddGrade((float)57.6);
 
-			//act
-			emp.AddGrade("3");
-			emp.AddGrade("4");
-			emp.AddGrade("6");
-			var stat = emp.GetStatistics();
-
-			//assert
-			Assert.AreEqual(6, stat.Max);
-		}
-
-		[Test]
-		public void CheckCorrectMinValueGradeForString()
-		{
-			//arrange
-			var emp = new Employee("Palwol", "TestUser");
-
-			//act
-			emp.AddGrade("3");
-			emp.AddGrade("4");
-			emp.AddGrade("6");
-			var stat = emp.GetStatistics();
-
-			//assert
-			Assert.AreEqual(3, stat.Min);
-		}
-
-		[Test]
-		public void CheckCorrectAverageValueGradeForString()
-		{
-			//arrange
-			var emp = new Employee("Palwol", "TestUser");
-
-			//act
-			emp.AddGrade("3");
-			emp.AddGrade("4");
-			emp.AddGrade("6");
-			var stat = emp.GetStatistics();
-
-			/* 
-			 * assert
-			 * Must be cast to float, default is double
-			 */
-
-			Assert.AreEqual((float)13.0 / (float)3.0, stat.Average);
+			Assert.IsNotNull(emp.Statistics);
+			Assert.AreEqual('E', Employee.ConvertGradeToLetter(emp.Statistics.Max));
 		}
 	}
 }

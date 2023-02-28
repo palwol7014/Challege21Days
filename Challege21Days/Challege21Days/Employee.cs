@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +11,22 @@ namespace Challege21Days
 	public class Employee
 	{
 		private List<float> grades = new List<float>();
+		private bool isChange = false;
+		private Statistics? statistics;
 		public string Name{ get; private set; }
 		public string Surname { get; private set; }
+		public Statistics? Statistics
+		{
+			get
+			{
+				if(isChange)
+				{
+					GetStatistics();
+				}
+
+				return statistics;
+			}
+		}
 
 		public Employee(string name, string surname)
 		{
@@ -23,6 +39,7 @@ namespace Challege21Days
 			if (grade >= 0 && grade <= 100)
 			{
 				grades.Add(grade);
+				isChange = true;
 			}
 			else
 			{
@@ -32,23 +49,24 @@ namespace Challege21Days
 
 		public void AddGrade(string grade)
 		{
-			float fGrade;
-			bool isParse = float.TryParse(grade, out fGrade);
+			grade = grade.ToLower();
 
-			if (isParse && fGrade >= 0 && fGrade <= 100)
+			if (grade[0] >= 'a' && grade[0] <= 'j')
 			{
-				grades.Add(fGrade);
+				grades.Add(('j' - grade[0] + 1) * 10);
+				isChange = true;
 			}
 			else
 			{
-				Console.WriteLine("Nieprawidłowa ocena. Ocena musi się mieścić w przedziale od 0 do 100.");
+				Console.WriteLine("Nieprawidłowa litera. Tylko są akceptowalne litery od \"a\" do \"j\"");
 			}
 		}
 
-		public Statistics GetStatistics()
+		private void GetStatistics()
 		{
-			var statistics = new Statistics();
-			foreach(var grade in grades)
+			statistics ??= new Statistics();
+
+			foreach (var grade in grades)
 			{
 				statistics.Min = Math.Min(statistics.Min, grade);
 				statistics.Max = Math.Max(statistics.Max, grade);
@@ -56,15 +74,30 @@ namespace Challege21Days
 			}
 
 			statistics.Average /= grades.Count;
+			isChange = false;
+		}
+		/*
+		 * The method converts the grade to a letter. A is 100 or more and J is 10 or less. The other letters change every 10 points.
+		 */
+		public static char ConvertGradeToLetter(float grade)
+		{
+			int gradeInInt = (int)(grade / 10);
 
-			return statistics;
+			if (gradeInInt > 10)
+			{
+				return 'A';
+			}
+			else
+			{
+				return (char)('J' - gradeInInt);
+			}
 		}
 
 		public override string ToString()
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"Imię: {Name}");
-			sb.AppendLine($"Nazwisko: {Surname}");
+			sb.AppendLine($"Nazwisko: {Surname}\n");
 
 			return sb.ToString();
 		}
